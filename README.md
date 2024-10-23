@@ -1,6 +1,6 @@
-# ChicBid - Plateforme d'enchères en ligne
+# LuxoBid - Plateforme d'enchères en ligne
 
-**ChicBid** est une plateforme d'enchères en ligne, conçue pour permettre aux utilisateurs de vendre et d'enchérir sur des articles facilement et en toute sécurité. La plateforme offre une expérience utilisateur fluide, avec des fonctionnalités de gestion des enchères, des paiements, et des notifications en temps réel.
+**LuxoBid ** est une plateforme d'enchères en ligne, conçue pour permettre aux utilisateurs de vendre et d'enchérir sur des articles facilement et en toute sécurité. La plateforme offre une expérience utilisateur fluide, avec des fonctionnalités de gestion des enchères, des paiements, et des notifications en temps réel.
 
 ## Fonctionnalités Principales
 
@@ -13,7 +13,7 @@
 - **Tableau de Bord Admin** : Gestion des utilisateurs, des articles et des enchères.
 - **Automatisation des Tâches** : Système d’automatisation pour la gestion des paiements et des commissions.
 
-## Comment Fonctionne ChicBid
+## Comment Fonctionne LuxoBid 
 
 1. **Inscription Utilisateur** : Les utilisateurs peuvent s'inscrire en tant que "Enchérisseur" ou "Vendeur aux enchères".
 2. **Processus d'Enchère** : Les enchérisseurs placent leurs enchères sur des articles, tandis que les vendeurs peuvent ajouter et gérer leurs articles.
