@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect } from "react";
 import {
   FaUser,
   FaGavel,
@@ -9,77 +9,73 @@ import {
 } from "react-icons/fa";
 
 const HowItWorks = () => {
-  const steps = [
+  const etapes = [
     {
       icon: <FaUser />,
-      title: "User Registration",
+      title: "Inscription Utilisateur",
       description:
-        "Users must register or log in to perform operations such as posting auctions, bidding on items, accessing the dashboard, and sending payment proof.",
+        "Les utilisateurs doivent s'inscrire ou se connecter pour effectuer des opérations telles que la publication d'enchères, les enchères sur des articles, l'accès au tableau de bord et l'envoi de preuve de paiement.",
     },
     {
       icon: <FaGavel />,
-      title: "Role Selection",
+      title: "Sélection de Rôle",
       description:
-        'Users can register as either a "Bidder" or "Auctioneer." Bidders can bid on items, while Auctioneers can post items.',
+        'Les utilisateurs peuvent s’inscrire soit en tant qu’"Enchérisseur" soit en tant que "Vendeur aux enchères". Les enchérisseurs peuvent enchérir sur des articles, tandis que les vendeurs peuvent publier des articles.',
     },
     {
       icon: <FaEnvelope />,
-      title: "Winning Bid Notification",
+      title: "Notification de l'Enchère Gagnante",
       description:
-        "After winning an item, the highest bidder will receive an email with the Auctioneer's payment method information, including bank transfer, Easypaisa, and PayPal.",
+        "Après avoir remporté un article, l'enchérisseur le plus élevé recevra un e-mail avec les informations sur le mode de paiement du vendeur, y compris les virements bancaires, Easypaisa et PayPal.",
     },
     {
       icon: <FaDollarSign />,
-      title: "Commission Payment",
+      title: "Paiement de la Commission",
       description:
-        "If the Bidder pays, the Auctioneer must pay 5% of that payment to the platform. Failure to pay results in being unable to post new items, and a legal notice will be sent.",
+        "Si l'enchérisseur paie, le vendeur doit verser 5% de ce paiement à la plateforme. En cas de non-paiement, il sera impossible de publier de nouveaux articles, et une notification légale sera envoyée.",
     },
     {
       icon: <FaFileInvoice />,
-      title: "Proof of Payment",
+      title: "Preuve de Paiement",
       description:
-        "The platform receives payment proof as a screenshot and the total amount sent. Once approved by the Administrator, the unpaid commission of the Auctioneer will be adjusted accordingly.",
+        "La plateforme reçoit une capture d'écran de la preuve de paiement ainsi que le montant total envoyé. Une fois approuvée par l'administrateur, la commission impayée du vendeur sera ajustée en conséquence.",
     },
     {
       icon: <FaRedo />,
-      title: "Reposting Items",
+      title: "Republication des Articles",
       description:
-        "If the Bidder does not pay, the Auctioneer can republish the item without any additional cost.",
+        "Si l'enchérisseur ne paie pas, le vendeur peut republier l'article sans frais supplémentaires.",
     },
   ];
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
-    <>
-      <section className="w-full ml-0 m-0 h-fit px-5 pt-20 lg:pl-[320px] flex flex-col min-h-screen py-4 justify-center">
-        <h1
-          className={`text-[#d6482b] text-2xl font-bold mb-2 min-[480px]:text-4xl md:text-6xl xl:text-7xl 2xl:text-8xl`}
-        >
-          Discover How PrimeBid Operates
-        </h1>
-        <div className="flex flex-col gap-4 my-5">
-          {steps.map((element, index) => {
-            return (
-              <div
-                key={index}
-                className="bg-white rounded-md p-2 lg:p-5 flex flex-col gap-2 group hover:bg-black transition-all duration-300"
-              >
-                <div className="bg-black text-white p-3 text-xl rounded-full w-fit group-hover:bg-[#d6482b] transition-all duration-300">
-                  {element.icon}
-                </div>
-                <h3
-                  className={`text-[#D6482B] text-xl font-semibold mb-2 min-[480px]:text-xl md:text-2xl lg:text-3xl`}
-                >
-                  {element.title}
-                </h3>
-                <p className="text-xl text-stone-700 group-hover:text-[#fff] transition-all duration-300">
-                  {element.description}
-                </p>
-              </div>
-            );
-          })}
-        </div>
-      </section>
-    </>
+    <section className="w-full h-fit px-5 pt-20 lg:pl-[60px] flex flex-col min-h-screen py-4 justify-center items-center text-center">
+      <h1 className="text-[#333333] text-2xl font-bold mt-6 mb-4 min-[480px]:text-3xl md:text-4xl xl:text-5xl">
+        Découvrez Comment Fonctionne ChicBid
+      </h1>
+      <div className="flex flex-col gap-6 my-5">
+        {etapes.map((element, index) => (
+          <div
+            key={index}
+            className="bg-white rounded-md shadow-md p-4 lg:p-5 flex flex-col gap-3 group hover:bg-[#5C8374] transition-all duration-300" // Teinte vert clair pour hover
+          >
+            <div className="bg-black text-white p-2 text-lg rounded-full w-fit mx-auto group-hover:bg-[#5C8374] transition-all duration-300">
+              {element.icon}
+            </div>
+            <h3 className="text-[#333333] text-lg font-semibold min-[480px]:text-lg md:text-xl lg:text-2xl">
+              {element.title}
+            </h3>
+            <p className="text-sm text-gray-700 group-hover:text-black transition-all duration-300">
+              {element.description}
+            </p>
+          </div>
+        ))}
+      </div>
+    </section>
   );
 };
 

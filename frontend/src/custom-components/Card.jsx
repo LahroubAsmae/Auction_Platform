@@ -10,7 +10,7 @@ const Card = ({ imgSrc, title, startingBid, startTime, endTime, id }) => {
 
     if (startDifference > 0) {
       timeLeft = {
-        type: "Starts In:",
+        type: "Commence dans :",
         days: Math.floor(startDifference / (1000 * 60 * 60 * 24)),
         hours: Math.floor((startDifference / (1000 * 60 * 60)) % 24),
         minutes: Math.floor((startDifference / 1000 / 60) % 60),
@@ -18,7 +18,7 @@ const Card = ({ imgSrc, title, startingBid, startTime, endTime, id }) => {
       };
     } else if (endDifference > 0) {
       timeLeft = {
-        type: "Ends In:",
+        type: "Se termine dans :",
         days: Math.floor(endDifference / (1000 * 60 * 60 * 24)),
         hours: Math.floor((endDifference / (1000 * 60 * 60)) % 24),
         minutes: Math.floor((endDifference / 1000 / 60) % 60),
@@ -33,51 +33,46 @@ const Card = ({ imgSrc, title, startingBid, startTime, endTime, id }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setTimeLeft(calculateTimeLeft());
-    });
+    }, 1000); // Update every second
     return () => clearTimeout(timer);
   }, [timeLeft]);
 
   const formatTimeLeft = ({ days, hours, minutes, seconds }) => {
     const pad = (num) => String(num).padStart(2, "0");
-    return `(${days} Days) ${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+    return `(${days} jours) ${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
   };
 
   return (
-    <>
-      <Link
-        to={`/auction/item/${id}`}
-        className="flex-grow basis-full bg-white rounded-md group sm:basis-56 lg:basis-60 2xl:basis-80"
-      >
-        <img
-          src={imgSrc}
-          alt={title}
-          className="w-full aspect-[4/3] m-auto md:p-12"
-        />
-        <div className="px-2 pt-4 pb-2">
-          <h5 className="font-semibold text-[18px] group-hover:text-[#d6482b] mb-2">
-            {title}
-          </h5>
-          {startingBid && (
-            <p className="text-stone-600 font-light">
-              Starting Bid:{" "}
-              <span className="text-[#fdba88] font-bold ml-1">
-                {startingBid}
-              </span>
-            </p>
-          )}
-          <p className="text-stone-600 font-light">
-            {timeLeft.type}
-            {Object.keys(timeLeft).length > 1 ? (
-              <span className="text-[#fdba88] font-bold ml-1">
-                {formatTimeLeft(timeLeft)}
-              </span>
-            ) : (
-              <span className="text-[#fdba88] font-bold ml-1">Time's up!</span>
-            )}
+    <Link
+      to={`/auction/item/${id}`}
+      className="bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden w-80 h-auto flex flex-col m-4 transition-transform transform hover:scale-105" // Adjusted width and added hover effect
+    >
+      <img
+        src={imgSrc}
+        alt={title}
+        className="w-full h-48 object-cover rounded-t-lg" // Adjusted image height and added rounded corners
+      />
+      <div className="flex-grow flex flex-col justify-center items-center text-center p-4">
+        <h4 className="text-lg font-semibold mb-2">{title}</h4>
+        {startingBid && (
+          <p className="text-xl font-bold text-[#5C8374] mb-2">
+            Enchère de départ : ${startingBid}
           </p>
-        </div>
-      </Link>
-    </>
+        )}
+        <p className="text-gray-600">
+          {timeLeft.type}
+          {Object.keys(timeLeft).length > 1 ? (
+            <span className="font-bold text-[#fdba88] ml-1">
+              {formatTimeLeft(timeLeft)}
+            </span>
+          ) : (
+            <span className="font-bold text-[#fdba88] ml-1">
+              Temps écoulé !
+            </span>
+          )}
+        </p>
+      </div>
+    </Link>
   );
 };
 

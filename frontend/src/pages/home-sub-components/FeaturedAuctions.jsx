@@ -6,24 +6,22 @@ const FeaturedAuctions = () => {
   const { allAuctions, loading } = useSelector((state) => state.auction);
   return (
     <>
-      <section className="my-8">
-        <h3 className="text-[#111] text-xl font-semibold mb-2 min-[480px]:text-xl md:text-2xl lg:text-3xl">
-          Featured Auctions
+      <section className="flex flex-col items-center mt-7 mb-16">
+        <h3 className="text-[rgb(17,17,17)] text-2xl md:text-3xl lg:text-4xl font-semibold mb-8">
+          Enchères à la Une
         </h3>
-        <div className="flex flex-wrap gap-6">
-          {allAuctions.slice(0, 8).map((element) => {
-            return (
-              <Card
-                title={element.title}
-                imgSrc={element.image?.url}
-                startTime={element.startTime}
-                endTime={element.endTime}
-                startingBid={element.startingBid}
-                id={element._id}
-                key={element._id}
-              />
-            );
-          })}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+          {allAuctions.slice(0, 8).map((element) => (
+            <Card
+              key={element._id}
+              title={element.title}
+              imgSrc={element.image?.url}
+              startTime={element.startTime}
+              endTime={element.endTime}
+              startingBid={element.startingBid}
+              id={element._id}
+            />
+          ))}
         </div>
       </section>
     </>

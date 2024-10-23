@@ -37,7 +37,7 @@ const CardTwo = ({ imgSrc, title, startingBid, startTime, endTime, id }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setTimeLeft(calculateTimeLeft());
-    });
+    }, 1000);
     return () => clearTimeout(timer);
   }, [timeLeft]);
 
@@ -55,55 +55,54 @@ const CardTwo = ({ imgSrc, title, startingBid, startTime, endTime, id }) => {
 
   return (
     <>
-      <div className="basis-full bg-white rounded-md group sm:basis-56 lg:basis-60 2xl:basis-80">
-        <img
-          src={imgSrc}
-          alt={title}
-          className="w-full aspect-[4/3] m-auto md:p-12"
-        />
-        <div className="px-2 pt-4 pb-2">
-          <h5 className="font-semibold text-[18px] group-hover:text-[#d6482b] mb-2">
-            {title}
-          </h5>
-          {startingBid && (
-            <p className="text-stone-600 font-light">
-              Starting Bid:{" "}
-              <span className="text-[#fdba88] font-bold ml-1">
-                {startingBid}
-              </span>
-            </p>
-          )}
-          <p className="text-stone-600 font-light">
-            {timeLeft.type}
-            {Object.keys(timeLeft).length > 1 ? (
-              <span className="text-[#fdba88] font-bold ml-1">
-                {formatTimeLeft(timeLeft)}
-              </span>
-            ) : (
-              <span className="text-[#fdba88] font-bold ml-1">Time's up!</span>
-            )}
-          </p>
-          <div className="flex flex-col gap-2 mt-4">
+      <div className="bg-white rounded-lg shadow-lg overflow-hidden p-8">
+        <div className="relative overflow-hidden">
+          <img
+            src={imgSrc}
+            alt={title}
+            className="object-cover w-full h-48 rounded-lg"
+          />
+          <div className="absolute inset-0 bg-black opacity-40"></div>
+          <div className="absolute inset-0 flex items-center justify-center">
             <Link
-              className="bg-stone-700 text-center text-white text-xl px-4 py-2 rounded-md transition-all duration-300 hover:bg-black"
+              className="bg-white text-gray-900 py-2 px-6 rounded-full font-bold hover:bg-gray-300"
               to={`/auction/details/${id}`}
             >
               View Auction
             </Link>
-            <button
-              className="bg-red-400 text-center text-white text-xl px-4 py-2 rounded-md transition-all duration-300 hover:bg-red-600"
-              onClick={handleDeleteAuction}
-            >
-              Delete Auction
-            </button>
-            <button
-              disabled={new Date(endTime) > Date.now()}
-              onClick={() => setOpenDrawer(true)}
-              className="bg-sky-400 text-center text-white text-xl px-4 py-2 rounded-md transition-all duration-300 hover:bg-sky-700"
-            >
-              Republish Auction
-            </button>
           </div>
+        </div>
+        <h3 className="text-xl font-bold text-gray-900 mt-4">{title}</h3>
+        {startingBid && (
+          <p className="text-gray-500 text-sm mt-2">
+            Starting Bid:{" "}
+            <span className="text-[#fdba88] font-bold ml-1">{startingBid}</span>
+          </p>
+        )}
+        <p className="text-gray-500 text-sm mt-2">
+          {timeLeft.type}
+          {Object.keys(timeLeft).length > 1 ? (
+            <span className="text-[#fdba88] font-bold ml-1">
+              {formatTimeLeft(timeLeft)}
+            </span>
+          ) : (
+            <span className="text-[#fdba88] font-bold ml-1">Time's up!</span>
+          )}
+        </p>
+        <div className="flex items-center justify-between mt-4">
+          <button
+            className="bg-red-400 text-white py-2 px-4 rounded-full font-bold hover:bg-red-600"
+            onClick={handleDeleteAuction}
+          >
+            Delete Auction
+          </button>
+          <button
+            disabled={new Date(endTime) > Date.now()}
+            onClick={() => setOpenDrawer(true)}
+            className="bg-sky-400 text-white py-2 px-4 rounded-full font-bold hover:bg-sky-700"
+          >
+            Republish Auction
+          </button>
         </div>
       </div>
       <Drawer id={id} openDrawer={openDrawer} setOpenDrawer={setOpenDrawer} />
@@ -111,14 +110,13 @@ const CardTwo = ({ imgSrc, title, startingBid, startTime, endTime, id }) => {
   );
 };
 
-export default CardTwo;
-
 const Drawer = ({ setOpenDrawer, openDrawer, id }) => {
   const dispatch = useDispatch();
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
-  const {loading} = useSelector(state => state.auction);
-  const handleRepbulishAuction = () => {
+  const { loading } = useSelector((state) => state.auction);
+
+  const handleRepublishAuction = () => {
     const formData = new FormData();
     formData.append("startTime", startTime);
     formData.append("endTime", endTime);
@@ -129,11 +127,11 @@ const Drawer = ({ setOpenDrawer, openDrawer, id }) => {
     <section
       className={`fixed ${
         openDrawer && id ? "bottom-0" : "-bottom-full"
-      }  left-0 w-full transition-all duration-300 h-full bg-[#00000087] flex items-end`}
+      } left-0 w-full transition-all duration-300 h-full bg-[#00000087] flex items-end`}
     >
       <div className="bg-white h-fit transition-all duration-300 w-full">
         <div className="w-full px-5 py-8 sm:max-w-[640px] sm:m-auto">
-          <h3 className="text-[#D6482B]  text-3xl font-semibold text-center mb-1">
+          <h3 className="text-[#D6482B] text-3xl font-semibold text-center mb-1">
             Republish Auction
           </h3>
           <p className="text-stone-600">
@@ -173,9 +171,9 @@ const Drawer = ({ setOpenDrawer, openDrawer, id }) => {
               <button
                 type="button"
                 className="bg-blue-500 flex justify-center w-full py-2 rounded-md text-white font-semibold text-xl transition-all duration-300 hover:bg-blue-700"
-                onClick={handleRepbulishAuction}
+                onClick={handleRepublishAuction}
               >
-                {loading ? "Republishing" : "Republish"} 
+                {loading ? "Republishing" : "Republish"}
               </button>
             </div>
             <div>
@@ -193,3 +191,5 @@ const Drawer = ({ setOpenDrawer, openDrawer, id }) => {
     </section>
   );
 };
+
+export default CardTwo;

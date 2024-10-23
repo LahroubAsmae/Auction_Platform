@@ -1,10 +1,12 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import FeaturedAuctions from "./home-sub-components/FeaturedAuctions";
 import UpcomingAuctions from "./home-sub-components/UpcomingAuctions";
 import Leaderboard from "./home-sub-components/Leaderboard";
-import Spinner from "@/custom-components/Spinner";
+import Footer from "@/layout/footer";
+
+// Import your background image
+import backgroundImage from "@/assets/bids.jpg"; // Adjust the path as necessary
 
 const Home = () => {
   const howItWorks = [
@@ -20,63 +22,45 @@ const Home = () => {
     },
   ];
 
-  const { isAuthenticated } = useSelector((state) => state.user);
   return (
     <>
-      <section className="w-full ml-0 m-0 h-fit px-5 pt-20 lg:pl-[320px] flex flex-col min-h-screen py-4 justify-center">
-        <div>
-          <p className="text-[#DECCBE] font-bold text-xl mb-8">
-            Transparency Leads to Your Victory
-          </p>
-          <h1
-            className={`text-[#111] text-2xl font-bold mb-2 min-[480px]:text-4xl md:text-6xl xl:text-7xl 2xl:text-8xl`}
-          >
-            Transparent Auctions
-          </h1>
-          <h1
-            className={`text-[#d6482b] text-2xl font-bold mb-2 min-[480px]:text-4xl md:text-6xl xl:text-7xl 2xl:text-8xl`}
-          >
-            Be The Winner
-          </h1>
-          <div className="flex gap-4 my-8">
-            {!isAuthenticated && (
-              <>
-                <Link
-                  to="/sign-up"
-                  className="bg-[#d6482b] font-semibold hover:bg-[#b8381e] rounded-md px-8 flex items-center py-2 text-white  transition-all duration-300"
-                >
-                  Sign Up
-                </Link>
-                <Link
-                  to={"/login"}
-                  className="text-[#DECCBE] bg-transparent border-2 border-[#DECCBE] hover:bg-[#fff3fd] hover:text-[#fdba88] font-bold text-xl  rounded-md px-8 flex items-center py-2 transition-all duration-300"
-                >
-                  Login
-                </Link>
-              </>
-            )}
+      <main className="w-full h-fit flex flex-col min-h-screen bg-[#f8f9fa] mx-0">
+        {/* Hero Section */}
+        <section className="flex flex-col items-center justify-center min-h-screen bg-[#1B4242] text-white w-full px-0 mb-20">
+          {/* Contenu du texte */}
+          <div className="lg:w-1/2 p-8 flex flex-col justify-center items-center">
+            <h1 className="text-[3rem] font-bold mb-6 text-center leading-snug transition duration-300">
+              Enchères Transparentes : Révélez le Gagnant en Vous
+            </h1>
+
+            <p className="text-[1.15rem] leading-[1.5] text-center mb-12 max-w-3xl mx-auto shadow-text">
+              Participez à une expérience d'enchères unique où chaque offre est
+              guidée par la transparence et l'intégrité. Rejoignez-nous pour
+              transformer vos ambitions en succès!
+            </p>
+
+            {/* Buttons */}
+            <div className="flex justify-center space-x-4">
+              <Link to="/auctions">
+                <button className="bg-[#5C8374] text-white py-3 px-8 rounded-full font-bold text-lg hover:bg-[#1B4242] border-2 border-[#5C8374] transition ease-in-out duration-300">
+                  Start Bidding
+                </button>
+              </Link>
+              <Link to="/auctions">
+                <button className="bg-transparent border-2 border-[#5C8374] text-[#5C8374] py-3 px-8 rounded-full font-bold text-lg hover:bg-[#5C8374] hover:text-white transition ease-in-out duration-300">
+                  Learn More
+                </button>
+              </Link>
+            </div>
           </div>
-        </div>
-        <div className="flex flex-col gap-6">
-          <h3 className="text-[#111] text-xl font-semibold mb-2 min-[480px]:text-xl md:text-2xl lg:text-3xl">How it works</h3>
-          <div className="flex flex-col gap-4 md:flex-row md:flex-wrap w-full">
-            {howItWorks.map((element) => {
-              return (
-                <div
-                  key={element.title}
-                  className="bg-white flex flex-col gap-2 p-2 rounded-md h-[96px] justify-center md:w-[48%] lg:w-[47%] 2xl:w-[24%] hover:shadow-md transition-all duration-300"
-                >
-                  <h5 className="font-bold">{element.title}</h5>
-                  <p>{element.description}</p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
+        </section>
+
+        {/* Featured Sections */}
         <FeaturedAuctions />
         <UpcomingAuctions />
         <Leaderboard />
-      </section>
+      </main>
+      <Footer />
     </>
   );
 };

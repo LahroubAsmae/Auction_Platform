@@ -25,15 +25,17 @@ const SubmitCommission = () => {
 
   return (
     <>
-      <section className="w-full ml-0 m-0 h-fit px-5 pt-20 lg:pl-[320px] flex flex-col min-h-screen py-4 justify-start">
-        <div className="bg-white mx-auto w-full h-auto px-2 flex flex-col gap-4 items-center py-4 justify-center rounded-md">
+      <section className="w-full h-screen px-5 pt-20 flex flex-col justify-center items-center">
+        <div className="bg-white w-full max-w-2xl h-auto px-4 flex flex-col gap-4 items-center py-6 justify-center rounded-md shadow-md">
           <form
             className="flex flex-col gap-5 w-full"
             onSubmit={handlePaymentProof}
           >
-            <h3 className={`text-[#D6482B] text-xl font-semibold mb-2 min-[480px]:text-xl md:text-2xl lg:text-3xl`}>Upload Payment Proof</h3>
+            <h3 className="text-[#5C8374] text-2xl md:text-3xl font-semibold mb-4 text-center">
+              Télécharger la preuve de paiement
+            </h3>
             <div className="flex flex-col gap-2">
-              <label className="text-[16px] text-stone-500">Amount</label>
+              <label className="text-[16px] text-stone-500">Montant</label>
               <input
                 type="number"
                 value={amount}
@@ -43,7 +45,7 @@ const SubmitCommission = () => {
             </div>
             <div className="flex flex-col gap-2">
               <label className="text-[16px] text-stone-500">
-                Payment Proof (ScreenShot)
+                Preuve de paiement (capture d'écran)
               </label>
               <input
                 type="file"
@@ -52,7 +54,7 @@ const SubmitCommission = () => {
               />
             </div>
             <div className="flex flex-col gap-2">
-              <label className="text-[16px] text-stone-500">Comment</label>
+              <label className="text-[16px] text-stone-500">Commentaire</label>
               <textarea
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
@@ -60,12 +62,14 @@ const SubmitCommission = () => {
                 className="text-[16px] py-2 bg-transparent border-[1px] rounded-md px-1 border-stone-500 focus:outline-none"
               />
             </div>
-              <button
-                className="bg-[#d6482b] mx-auto font-semibold hover:bg-[#b8381e] text-xl transition-all duration-300 py-2 px-4 rounded-md text-white my-4"
-                type="submit"
-              >
-                {loading ? "Uploading..." : "Upload Payment Proof"}
-              </button>
+            <button
+              className="bg-[#5C8374] mx-auto font-semibold hover:bg-[#1B4242] text-xl transition-all duration-300 py-2 px-4 rounded-md text-white my-4"
+              type="submit"
+            >
+              {loading
+                ? "Téléchargement en cours..."
+                : "Télécharger la preuve de paiement"}
+            </button>
           </form>
         </div>
       </section>

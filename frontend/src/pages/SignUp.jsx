@@ -13,8 +13,7 @@ const SignUp = () => {
   const [bankAccountName, setBankAccountName] = useState("");
   const [bankAccountNumber, setBankAccountNumber] = useState("");
   const [bankName, setBankName] = useState("");
-  const [easypaisaAccountNumber, setEasypaisaAccountNumber] = useState("");
-  const [paypalEmail, setPaypalEmail] = useState("");
+  const [mobileMoneyAccountNumber, setMobileMoneyAccountNumber] = useState("");
   const [profileImage, setProfileImage] = useState("");
   const [profileImagePreview, setProfileImagePreview] = useState("");
 
@@ -32,12 +31,12 @@ const SignUp = () => {
     formData.append("address", address);
     formData.append("role", role);
     formData.append("profileImage", profileImage);
-    role === "Auctioneer" &&
-      (formData.append("bankAccountName", bankAccountName),
-      formData.append("bankAccountNumber", bankAccountNumber),
-      formData.append("bankName", bankName),
-      formData.append("easypaisaAccountNumber", easypaisaAccountNumber),
-      formData.append("paypalEmail", paypalEmail));
+    if (role === "Auctioneer") {
+      formData.append("bankAccountName", bankAccountName);
+      formData.append("bankAccountNumber", bankAccountNumber);
+      formData.append("bankName", bankName);
+      formData.append("mobileMoneyAccountNumber", mobileMoneyAccountNumber);
+    }
     dispatch(register(formData));
   };
 
@@ -59,28 +58,25 @@ const SignUp = () => {
 
   return (
     <>
-      <section className="w-full ml-0 m-0 h-fit px-5 pt-20 lg:pl-[320px] flex flex-col min-h-screen py-4 justify-center">
-        <div className="bg-white mx-auto w-full h-auto px-2 flex flex-col gap-4 items-center py-4 justify-center rounded-md">
-          <h1
-            className={`text-[#d6482b] text-2xl font-bold mb-2 min-[480px]:text-4xl md:text-6xl xl:text-7xl 2xl:text-8xl`}
-          >
-            Register
-          </h1>
+      <section className="w-full h-screen flex items-center justify-center px-5 py-20 lg:pl-[120px] mt-10">
+        <div className="bg-white w-full h-auto px-4 flex flex-col gap-4 items-center py-4 justify-center rounded-md shadow-md">
           <form
-            className="flex flex-col gap-5 w-full"
+            className="flex flex-col gap-5 w-full mt-9"
             onSubmit={handleRegister}
           >
-            <p className="font-semibold text-xl md:text-2xl">
-              Personal Details
+            <p className="font-semibold text-xl md:text-2xl text-[#5C8374]">
+              Détails personnels
             </p>
             <div className="flex flex-col gap-4 sm:flex-row">
               <div className="flex flex-col sm:flex-1">
-                <label className="text-[16px] text-stone-600">Full Name</label>
+                <label className="text-[16px] text-stone-600">
+                  Nom complet
+                </label>
                 <input
                   type="text"
                   value={userName}
                   onChange={(e) => setUserName(e.target.value)}
-                  className="text-[16px] py-2 bg-transparent border-b-[1px] border-b-stone-500 focus:outline-none"
+                  className="text-[16px] py-2 bg-transparent border-b-[2px] border-b-[#5C8374] focus:outline-none transition duration-300"
                 />
               </div>
               <div className="flex flex-col sm:flex-1">
@@ -89,56 +85,58 @@ const SignUp = () => {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="text-[16px] py-2 bg-transparent border-b-[1px] border-b-stone-500 focus:outline-none"
+                  className="text-[16px] py-2 bg-transparent border-b-[2px] border-b-[#5C8374] focus:outline-none transition duration-300"
                 />
               </div>
             </div>
             <div className="flex flex-col gap-4 sm:flex-row">
               <div className="flex flex-col sm:flex-1">
-                <label className="text-[16px] text-stone-600">Phone</label>
+                <label className="text-[16px] text-stone-600">Téléphone</label>
                 <input
                   type="number"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                  className="text-[16px] py-2 bg-transparent border-b-[1px] border-b-stone-500 focus:outline-none"
+                  className="text-[16px] py-2 bg-transparent border-b-[2px] border-b-[#5C8374] focus:outline-none transition duration-300"
                 />
               </div>
               <div className="flex flex-col sm:flex-1">
-                <label className="text-[16px] text-stone-600">Address</label>
+                <label className="text-[16px] text-stone-600">Adresse</label>
                 <input
                   type="text"
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
-                  className="text-[16px] py-2 bg-transparent border-b-[1px] border-b-stone-500 focus:outline-none"
+                  className="text-[16px] py-2 bg-transparent border-b-[2px] border-b-[#5C8374] focus:outline-none transition duration-300"
                 />
               </div>
             </div>
             <div className="flex flex-col gap-4 sm:flex-row">
               <div className="flex flex-col sm:flex-1">
-                <label className="text-[16px] text-stone-600">Role</label>
+                <label className="text-[16px] text-stone-600">Rôle</label>
                 <select
                   value={role}
                   onChange={(e) => setRole(e.target.value)}
-                  className="text-[16px] py-2 bg-transparent border-b-[1px] border-b-stone-500 focus:outline-none"
+                  className="text-[16px] py-2 bg-transparent border-b-[2px] border-b-[#5C8374] focus:outline-none transition duration-300"
                 >
-                  <option value="">Select Role</option>
+                  <option value="">Sélectionner le rôle</option>
                   <option value="Auctioneer">Auctioneer</option>
                   <option value="Bidder">Bidder</option>
                 </select>
               </div>
               <div className="flex flex-col sm:flex-1">
-                <label className="text-[16px] text-stone-600">Password</label>
+                <label className="text-[16px] text-stone-600">
+                  Mot de passe
+                </label>
                 <input
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="text-[16px] py-2 bg-transparent border-b-[1px] border-b-stone-500 focus:outline-none"
+                  className="text-[16px] py-2 bg-transparent border-b-[2px] border-b-[#5C8374] focus:outline-none transition duration-300"
                 />
               </div>
             </div>
             <div className="flex flex-col sm:flex-1 gap-2">
               <label className="text-[16px] text-stone-600">
-                Profile Image
+                Image de profil
               </label>
               <div className="flex items-center gap-3">
                 <img
@@ -147,87 +145,77 @@ const SignUp = () => {
                       ? profileImagePreview
                       : "/imageHolder.jpg"
                   }
-                  alt="profileImagePreview"
-                  className="w-14 h-14 rounded-full"
+                  alt="Aperçu de l'image de profil"
+                  className="w-14 h-14 rounded-full border-2 border-[#5C8374]"
                 />
-                <input type="file" onChange={imageHandler} />
+                <input
+                  type="file"
+                  onChange={imageHandler}
+                  className="border-b-[2px] border-b-[#5C8374]"
+                />
               </div>
             </div>
             <div className="flex flex-col gap-4">
-              <label className="font-semibold text-xl md:2xl flex flex-col">
-                Payment Method Details{" "}
+              <label className="font-semibold text-xl md:text-2xl flex flex-col text-[#5C8374]">
+                Détails du mode de paiement
                 <span className="text-[12px] text-stone-500">
-                  Fill Payment Details Only If you are registering as an
-                  Auctioneer
+                  Remplissez les détails de paiement uniquement si vous vous
+                  inscrivez en tant qu'enchérisseur
                 </span>
               </label>
               <div className="flex flex-col gap-2">
-                <label className="text-[16px] text-stone-500">
-                  Bank Details
+                <label className="text-[16px] text-stone-600">
+                  Détails bancaires
                 </label>
                 <div className="flex flex-col gap-1 sm:flex-row sm:gap-4">
                   <select
                     value={bankName}
                     onChange={(e) => setBankName(e.target.value)}
-                    className="text-[16px] py-2 bg-transparent border-b-[1px] border-b-stone-500 focus:outline-none sm:flex-1"
+                    className="text-[16px] py-2 bg-transparent border-b-[2px] border-b-[#5C8374] focus:outline-none transition duration-300 sm:flex-1"
                     disabled={role === "Bidder"}
                   >
-                    <option value="">Select Your Bank</option>
-                    <option value="Meezan Bank">Meezan Bank</option>
-                    <option value="UBL">UBL</option>
-                    <option value="HBL">HBL</option>
-                    <option value="Allied Bank">Allied Bank</option>
+                    <option value="">Sélectionnez votre banque</option>
+                    <option value="Attijariwafa Bank">Attijariwafa Bank</option>
+                    <option value="BMCE Bank">BMCE Bank</option>
+                    <option value="Banque Populaire">Banque Populaire</option>
+                    <option value="Société Générale">Société Générale</option>
                   </select>
                   <input
                     type="text"
                     value={bankAccountNumber}
-                    placeholder="IBAN / IFSC"
+                    placeholder="IBAN"
                     onChange={(e) => setBankAccountNumber(e.target.value)}
-                    className="text-[16px] py-2 bg-transparent border-b-[1px] border-b-stone-500 focus:outline-none sm:flex-1"
+                    className="text-[16px] py-2 bg-transparent border-b-[2px] border-b-[#5C8374] focus:outline-none transition duration-300 sm:flex-1"
                     disabled={role === "Bidder"}
                   />
                   <input
                     type="text"
                     value={bankAccountName}
-                    placeholder="Bank Account UserName"
+                    placeholder="Nom du titulaire"
                     onChange={(e) => setBankAccountName(e.target.value)}
-                    className="text-[16px] py-2 bg-transparent border-b-[1px] border-b-stone-500 focus:outline-none sm:flex-1"
+                    className="text-[16px] py-2 bg-transparent border-b-[2px] border-b-[#5C8374] focus:outline-none transition duration-300 sm:flex-1"
                     disabled={role === "Bidder"}
                   />
                 </div>
-              </div>
-              <div>
-                <label className="text-[16px] text-stone-600 font-semibold">
-                  Easypaisa And Paypal Details
+                <label className="text-[16px] text-stone-600">
+                  Compte de Mobile Money
                 </label>
-                <div className="flex flex-col gap-1 sm:flex-row sm:gap-4">
-                  <input
-                    type="number"
-                    value={easypaisaAccountNumber}
-                    placeholder="Easypaisa Account Number"
-                    onChange={(e) => setEasypaisaAccountNumber(e.target.value)}
-                    className="text-[16px] py-2 bg-transparent border-b-[1px] border-b-stone-500 focus:outline-none sm:flex-1"
-                    disabled={role === "Bidder"}
-                  />
-                  <input
-                    type="email"
-                    value={paypalEmail}
-                    placeholder="Paypal Email"
-                    onChange={(e) => setPaypalEmail(e.target.value)}
-                    className="text-[16px] py-2 bg-transparent border-b-[1px] border-b-stone-500 focus:outline-none sm:flex-1"
-                    disabled={role === "Bidder"}
-                  />
-                </div>
+                <input
+                  type="text"
+                  value={mobileMoneyAccountNumber}
+                  placeholder="Numéro de compte"
+                  onChange={(e) => setMobileMoneyAccountNumber(e.target.value)}
+                  className="text-[16px] py-2 bg-transparent border-b-[2px] border-b-[#5C8374] focus:outline-none transition duration-300"
+                  disabled={role === "Bidder"}
+                />
               </div>
             </div>
-
             <button
-              className="bg-[#d6482b] w-[420px] font-semibold hover:bg-[#b8381e] transition-all duration-300 text-xl py-2 px-4 rounded-md text-white mx-auto lg:w-[640px] my-4"
+              className="bg-[#5C8374] text-white text-center px-4 py-2 rounded-full mb-2 hover:bg-[#1B4242] transition-colors duration-200 w-40 ml-11 items-center justify-center"
               type="submit"
               disabled={loading}
             >
-              {loading && "Registering..."}
-              {!loading && "Register"}
+              {loading ? "Chargement..." : "S'inscrire"}
             </button>
           </form>
         </div>

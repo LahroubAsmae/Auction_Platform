@@ -17,16 +17,16 @@ const CreateAuction = () => {
   const [endTime, setEndTime] = useState("");
 
   const auctionCategories = [
-    "Electronics",
-    "Furniture",
-    "Art & Antiques",
-    "Jewelry & Watches",
+    "Électronique",
+    "Meubles",
+    "Art & Antiquités",
+    "Bijoux & Montres",
     "Automobiles",
-    "Real Estate",
-    "Collectibles",
-    "Fashion & Accessories",
-    "Sports Memorabilia",
-    "Books & Manuscripts",
+    "Immobilier",
+    "Objets de Collection",
+    "Mode & Accessoires",
+    "Souvenirs Sportifs",
+    "Livres & Manuscrits",
   ];
 
   const imageHandler = (e) => {
@@ -62,161 +62,197 @@ const CreateAuction = () => {
     if (!isAuthenticated || user.role !== "Auctioneer") {
       navigateTo("/");
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated, user, navigateTo]);
 
   return (
-    <article className="w-full ml-0 m-0 h-fit px-5 pt-20 lg:pl-[320px] flex flex-col">
-      <h1
-        className={`text-[#d6482b] text-2xl font-bold mb-2 min-[480px]:text-4xl md:text-6xl xl:text-7xl 2xl:text-8xl`}
-      >
-        Create Auction
-      </h1>
-      <div className="bg-white mx-auto w-full h-auto px-2 flex flex-col gap-4 items-center py-4 justify-center rounded-md">
-        <form
-          className="flex flex-col gap-5 w-full"
-          onSubmit={handleCreateAuction}
-        >
-          <p className="font-semibold text-xl md:text-2xl">Auction Detail</p>
-          <div className="flex flex-col gap-4 sm:flex-row">
-            <div className="flex flex-col sm:flex-1">
-              <label className="text-[16px] text-stone-600">Title</label>
-              <input
-                type="text"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                className="text-[16px] py-2 bg-transparent border-b-[1px] border-b-stone-500 focus:outline-none"
-              />
-            </div>
-            <div className="flex flex-col sm:flex-1">
-              <label className="text-[16px] text-stone-600">Category</label>
-              <select
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
-                className="text-[16px] py-2 bg-transparent border-b-[1px] border-b-stone-500 focus:outline-none"
-              >
-                <option value="">Select Category</option>
-                {auctionCategories.map((element) => {
-                  return (
+    <div className="w-full min-h-screen mt-20 bg-[#f9fafb] flex items-center justify-center p-5">
+      <div className="bg-white w-full max-w-4xl px-8 py-10 rounded-lg shadow-lg">
+        <form className="flex flex-col gap-8" onSubmit={handleCreateAuction}>
+          {/* Détails de la Vente */}
+          <div>
+            <p className="font-semibold text-2xl text-[#5C8374] mb-4">
+              Détails de la Vente
+            </p>
+
+            {/* Titre et Catégorie */}
+            <div className="flex flex-col gap-6 sm:flex-row">
+              <div className="flex flex-col sm:flex-1">
+                <label className="text-[#5C8374] mb-2">Titre</label>
+                <input
+                  type="text"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  required
+                  className="text-[#333] py-3 px-4 bg-transparent border border-[#5C8374] rounded-md focus:outline-none focus:border-[#466857] transition-colors"
+                  placeholder="Entrez le titre de l'enchère"
+                />
+              </div>
+              <div className="flex flex-col sm:flex-1">
+                <label className="text-[#5C8374] mb-2">Catégorie</label>
+                <select
+                  value={category}
+                  onChange={(e) => setCategory(e.target.value)}
+                  required
+                  className="text-[#333] py-3 px-4 bg-transparent border border-[#5C8374] rounded-md focus:outline-none focus:border-[#466857] transition-colors"
+                >
+                  <option value="">Sélectionner une catégorie</option>
+                  {auctionCategories.map((element) => (
                     <option key={element} value={element}>
                       {element}
                     </option>
-                  );
-                })}
-              </select>
+                  ))}
+                </select>
+              </div>
             </div>
-          </div>
-          <div className="flex flex-col gap-4 sm:flex-row">
-            <div className="flex flex-col sm:flex-1">
-              <label className="text-[16px] text-stone-600">Condition</label>
-              <select
-                value={condition}
-                onChange={(e) => setCondition(e.target.value)}
-                className="text-[16px] py-2 bg-transparent border-b-[1px] border-b-stone-500 focus:outline-none"
-              >
-                <option value="">Select Condition</option>
-                <option value="New">New</option>
-                <option value="Used">Used</option>
-              </select>
+
+            {/* État et Mise de départ */}
+            <div className="flex flex-col gap-6 sm:flex-row">
+              <div className="flex flex-col sm:flex-1">
+                <label className="text-[#5C8374] mb-2">État</label>
+                <select
+                  value={condition}
+                  onChange={(e) => setCondition(e.target.value)}
+                  required
+                  className="text-[#333] py-3 px-4 bg-transparent border border-[#5C8374] rounded-md focus:outline-none focus:border-[#466857] transition-colors"
+                >
+                  <option value="">Sélectionner l'état</option>
+                  <option value="Neuf">Neuf</option>
+                  <option value="Usagé">Usagé</option>
+                </select>
+              </div>
+              <div className="flex flex-col sm:flex-1">
+                <label className="text-[#5C8374] mb-2">
+                  Mise de départ (dh)
+                </label>
+                <input
+                  type="number"
+                  value={startingBid}
+                  onChange={(e) => setStartingBid(e.target.value)}
+                  required
+                  min="0"
+                  className="text-[#333] py-3 px-4 bg-transparent border border-[#5C8374] rounded-md focus:outline-none focus:border-[#466857] transition-colors"
+                  placeholder="Entrez la mise de départ"
+                />
+              </div>
             </div>
-            <div className="flex flex-col sm:flex-1">
-              <label className="text-[16px] text-stone-600">Starting Bid</label>
-              <input
-                type="number"
-                value={startingBid}
-                onChange={(e) => setStartingBid(e.target.value)}
-                className="text-[16px] py-2 bg-transparent border-b-[1px] border-b-stone-500 focus:outline-none"
-              />
-            </div>
-          </div>
-          <div className="flex flex-col gap-4 sm:flex-row">
-            <div className="flex flex-col sm:flex-1">
-              <label className="text-[16px] text-stone-600">Description</label>
+
+            {/* Description */}
+            <div className="flex flex-col gap-2">
+              <label className="text-[#5C8374] mb-2">Description</label>
               <textarea
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                className="text-[16px] py-2 bg-transparent border-2 border-stone-500 focus:outline-none px-2 rounded-md"
-                rows={10}
+                required
+                className="text-[#333] py-3 px-4 bg-transparent border border-[#5C8374] rounded-md focus:outline-none focus:border-[#466857] transition-colors resize-none"
+                rows={6}
+                placeholder="Décrivez les détails de l'article"
               />
+            </div>
+
+            {/* Heure de début et de fin */}
+            <div className="flex flex-col gap-6 sm:flex-row">
+              <div className="flex flex-col sm:flex-1">
+                <label className="text-[#5C8374] mb-2">Heure de début</label>
+                <DatePicker
+                  selected={startTime}
+                  onChange={(date) => setStartTime(date)}
+                  showTimeSelect
+                  timeFormat="HH:mm"
+                  timeIntervals={15}
+                  dateFormat="dd/MM/yyyy HH:mm"
+                  required
+                  className="text-[#333] py-3 px-4 bg-transparent border border-[#5C8374] rounded-md focus:outline-none focus:border-[#466857] transition-colors w-full"
+                  placeholderText="Sélectionnez la date et l'heure de début"
+                />
+              </div>
+              <div className="flex flex-col sm:flex-1">
+                <label className="text-[#5C8374] mb-2">Heure de fin</label>
+                <DatePicker
+                  selected={endTime}
+                  onChange={(date) => setEndTime(date)}
+                  showTimeSelect
+                  timeFormat="HH:mm"
+                  timeIntervals={15}
+                  dateFormat="dd/MM/yyyy HH:mm"
+                  required
+                  className="text-[#333] py-3 px-4 bg-transparent border border-[#5C8374] rounded-md focus:outline-none focus:border-[#466857] transition-colors w-full"
+                  placeholderText="Sélectionnez la date et l'heure de fin"
+                  minDate={startTime}
+                />
+              </div>
             </div>
           </div>
-          <div className="flex flex-col gap-4 sm:flex-row">
-            <div className="flex flex-col sm:flex-1">
-              <label className="text-[16px] text-stone-600">
-                Auction Starting Time
-              </label>
-              <DatePicker
-                selected={startTime}
-                onChange={(date) => setStartTime(date)}
-                showTimeSelect
-                timeFormat="HH:mm"
-                timeIntervals={15}
-                dateFormat={"MMMM d, yyyy h,mm aa"}
-                className="text-[16px] py-2 bg-transparent border-b-[1px] border-b-stone-500 focus:outline-none w-full"
-              />
-            </div>
-            <div className="flex flex-col sm:flex-1">
-              <label className="text-[16px] text-stone-600">
-                Auction End Time
-              </label>
-              <DatePicker
-                selected={endTime}
-                onChange={(date) => setEndTime(date)}
-                showTimeSelect
-                timeFormat="HH:mm"
-                timeIntervals={15}
-                dateFormat={"MMMM d, yyyy h,mm aa"}
-                className="text-[16px] py-2 bg-transparent border-b-[1px] border-b-stone-500 focus:outline-none w-full"
-              />
-            </div>
-          </div>
-          <div className="flex flex-col gap-4">
-            <label className="font-semibold text-xl md:text-2xl">
-              Auction Item Image
-            </label>
-            <div class="flex items-center justify-center w-full">
+
+          {/* Image de l'article */}
+          <div>
+            <p className="font-semibold text-2xl text-[#5C8374] mb-4">
+              Image de l'article
+            </p>
+            <div className="flex items-center justify-center w-full">
               <label
-                for="dropzone-file"
-                class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+                htmlFor="dropzone-file"
+                className="flex flex-col items-center justify-center w-full h-64 border-2 border-dashed border-[#5C8374] rounded-lg cursor-pointer hover:bg-gray-100 transition-colors duration-200"
               >
-                <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                <div className="flex flex-col items-center justify-center pt-5 pb-6">
                   {imagePreview ? (
-                    <img src={imagePreview} alt={title} className="w-44 h-auto"/>
+                    <img
+                      src={imagePreview}
+                      alt={title}
+                      className="w-44 h-auto mb-4"
+                    />
                   ) : (
                     <>
                       <svg
-                        class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
-                        aria-hidden="true"
+                        className="w-12 h-12 mb-4 text-[#5C8374]"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 20 16"
                       >
                         <path
                           stroke="currentColor"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
                           d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
                         />
                       </svg>
+                      <p className="mb-2 text-lg text-[#5C8374]">
+                        <span className="font-semibold">
+                          Cliquez pour télécharger
+                        </span>{" "}
+                        ou glissez-déposez
+                      </p>
+                      <p className="text-sm text-[#5C8374]">
+                        PNG, JPG, JPEG (MAX. 5Mo)
+                      </p>
                     </>
                   )}
-
-                  <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                    <span class="font-semibold">Click to upload</span> or drag
-                    and drop
-                  </p>
-                  <p class="text-xs text-gray-500 dark:text-gray-400">
-                    SVG, PNG, JPG or GIF (MAX. 800x400px)
-                  </p>
                 </div>
-                <input id="dropzone-file" type="file" class="hidden" onChange={imageHandler}/>
+                <input
+                  id="dropzone-file"
+                  type="file"
+                  className="hidden"
+                  accept="image/*"
+                  onChange={imageHandler}
+                  required={!imagePreview}
+                />
               </label>
             </div>
           </div>
-          <button className="bg-[#D6482B] font-semibold hover:bg-[#b8381e] text-xl transition-all duration-300 py-2 px-4 rounded-md text-white w-[280px] mx-auto lg:w-[640px] my-4">{loading ? "Creating Auction..." : "Create Auction"}</button>
+
+          {/* Bouton de soumission */}
+          <div className="flex justify-center">
+            <button
+              type="submit"
+              className="bg-[#5C8374] text-white py-3 px-6 rounded-md hover:bg-[#466857] transition-colors duration-200 text-lg font-semibold"
+              disabled={loading}
+            >
+              {loading ? "Publication en cours..." : "Publier la Vente"}
+            </button>
+          </div>
         </form>
       </div>
-    </article>
+    </div>
   );
 };
 

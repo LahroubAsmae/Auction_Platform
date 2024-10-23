@@ -1,116 +1,112 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 const About = () => {
-  const values = [
+  const valeurs = [
     {
       id: 1,
-      title: "Integrity",
+      title: "Intégrité",
       description:
-        "We prioritize honesty and transparency in all our dealings, ensuring a fair and ethical auction experience for everyone.",
+        "Nous privilégions l'honnêteté et la transparence dans toutes nos transactions, garantissant une expérience d'enchères équitable et éthique pour tous.",
     },
     {
       id: 2,
       title: "Innovation",
       description:
-        "We continually enhance our platform with cutting-edge technology and features to provide users with a seamless and efficient auction process.",
+        "Nous améliorons continuellement notre plateforme avec des technologies et fonctionnalités de pointe pour offrir aux utilisateurs un processus d'enchères fluide et efficace.",
     },
     {
       id: 3,
-      title: "Community",
+      title: "Communauté",
       description:
-        "We foster a vibrant community of buyers and sellers who share a passion for finding and offering exceptional items.",
+        "Nous favorisons une communauté dynamique d'acheteurs et de vendeurs partageant une passion pour la découverte et l'offre d'objets exceptionnels.",
     },
     {
       id: 4,
-      title: "Customer Focus",
+      title: "Orientation client",
       description:
-        "We are committed to providing exceptional customer support and resources to help users navigate the auction process with ease.",
+        "Nous nous engageons à offrir un support client exceptionnel et des ressources pour aider les utilisateurs à naviguer facilement dans le processus d'enchères.",
     },
   ];
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
-    <>
-      <section className="w-full ml-0 m-0 h-fit px-5 pt-20 lg:pl-[320px] gap-7 flex flex-col min-h-screen py-4 justify-center">
-        <div>
-          <h1
-            className={`text-[#d6482b] text-2xl font-bold mb-2 min-[480px]:text-4xl md:text-6xl xl:text-7xl 2xl:text-8xl`}
-          >
-            About Us
-          </h1>
-          <p className="text-xl text-stone-600">
-            Welcome to PrimeBid, the ultimate destination for online auctions
-            and bidding excitement. Founded in 2024, we are dedicated to
-            providing a dynamic and user-friendly platform for buyers and
-            sellers to connect, explore, and transact in a secure and seamless
-            environment.
-          </p>
-        </div>
-        <div>
-          <h3
-            className={`text-[#111] text-xl font-semibold mb-2 min-[480px]:text-xl md:text-2xl lg:text-3xl`}
-          >
-            Our Mission
+    <section className="flex flex-col items-center justify-center min-h-screen w-full bg-gray-50 py-10">
+      <div className="w-full max-w-4xl text-center">
+        <h1 className="text-[#333333] text-4xl font-bold mt-20 mb-6">
+          À propos de nous
+        </h1>
+        <p className="text-lg text-gray-600 mb-10">
+          Bienvenue sur ChicBid, la destination ultime pour les enchères en
+          ligne et l'excitation des enchères. Fondée en 2024, nous nous
+          engageons à fournir une plateforme dynamique et conviviale pour que
+          les acheteurs et les vendeurs se connectent, explorent et effectuent
+          des transactions dans un environnement sécurisé et fluide.
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-5xl px-4">
+        <div className="bg-white rounded-lg shadow-lg p-6 transition-transform transform hover:scale-105">
+          <h3 className="text-[#1B4242] text-2xl font-semibold mb-2">
+            Notre Mission
           </h3>
-          <p className="text-xl text-stone-600">
-            At PrimeBid, our mission is to revolutionize the way people buy and
-            sell items online. We strive to create an engaging and trustworthy
-            marketplace that empowers individuals and businesses to discover
-            unique products, make informed decisions, and enjoy the thrill of
-            competitive bidding.
+          <p className="text-lg text-gray-700">
+            Chez ChicBid, notre mission est de révolutionner la manière dont les
+            gens achètent et vendent des objets en ligne. Nous nous efforçons de
+            créer un marché engageant et digne de confiance qui permet aux
+            individus et aux entreprises de découvrir des produits uniques, de
+            prendre des décisions éclairées et de profiter du frisson des
+            enchères compétitives.
           </p>
         </div>
-        <div>
-          <h3
-            className={`text-[#111] text-xl font-semibold mb-2 min-[480px]:text-xl md:text-2xl lg:text-3xl`}
-          >
-            Our Values
+
+        <div className="bg-white rounded-lg shadow-lg p-6 transition-transform transform hover:scale-105">
+          <h3 className="text-[#1B4242] text-2xl font-semibold mb-2">
+            Nos Valeurs
           </h3>
           <ul className="list-inside">
-            {values.map((element) => {
-              return (
-                <li className="text-xl text-stone-600 mb-2" key={element.id}>
-                  <span className="text-black font-bold">{element.title}</span>:{" "}
-                  {element.description}
-                </li>
-              );
-            })}
+            {valeurs.map((element) => (
+              <li className="text-lg text-gray-700 mb-2" key={element.id}>
+                <span className="font-bold">{element.title}</span> :{" "}
+                {element.description}
+              </li>
+            ))}
           </ul>
         </div>
-        <div>
-          <h3
-            className={`text-[#111] text-xl font-semibold mb-2 min-[480px]:text-xl md:text-2xl lg:text-3xl`}
-          >
-            Our Story
+
+        <div className="bg-white rounded-lg shadow-lg p-6 transition-transform transform hover:scale-105">
+          <h3 className="text-[#1B4242] text-2xl font-semibold mb-2">
+            Notre Histoire
           </h3>
-          <p className="text-xl text-stone-600">
-            Founded by CodeWithZeeshu, PrimeBid was born out of a passion for
-            connecting people with unique and valuable items. With years of
-            experience in the auction industry, our team is committed to
-            creating a platform that offers an unparalleled auction experience
-            for users worldwide.
+          <p className="text-lg text-gray-700">
+            Fondée par Lahroub Asmae, ChicBid est née de la passion de connecter
+            les gens à des objets uniques et précieux. Forts de plusieurs années
+            d'expérience dans le secteur des enchères, notre équipe s'engage à
+            créer une plateforme offrant une expérience d'enchères inégalée aux
+            utilisateurs du monde entier.
           </p>
         </div>
-        <div>
-          <h3
-            className={`text-[#111] text-xl font-semibold mb-2 min-[480px]:text-xl md:text-2xl lg:text-3xl`}
-          >
-            Join Us
+
+        <div className="bg-white rounded-lg shadow-lg p-6 transition-transform transform hover:scale-105 md:col-span-2 lg:col-span-1">
+          <h3 className="text-[#1B4242] text-2xl font-semibold mb-2">
+            Rejoignez-nous
           </h3>
-          <p className="text-xl text-stone-600">
-            Whether you're looking to buy, sell, or simply explore, PrimeBid
-            invites you to join our growing community of auction enthusiasts.
-            Discover new opportunities, uncover hidden gems, and experience the
-            thrill of winning your next great find.
+          <p className="text-lg text-gray-700">
+            Que vous cherchiez à acheter, à vendre ou simplement à explorer,
+            ChicBid vous invite à rejoindre notre communauté grandissante
+            d'amateurs d'enchères. Découvrez de nouvelles opportunités, dénichez
+            des trésors cachés, et vivez l'excitation de remporter votre
+            prochaine grande trouvaille.
           </p>
         </div>
-        <div>
-          <p className="text-[#d6482b] text-xl font-bold mb-3">
-            Thank you for choosing PrimeBid. We look forward to being a part of
-            your auction journey!
-          </p>
-        </div>
-      </section>
-    </>
+      </div>
+
+      <p className="text-[#1B4242] text-lg font-bold mt-10 text-center px-4">
+        Merci d'avoir choisi ChicBid. Nous avons hâte de faire partie de votre
+        parcours d'enchères !
+      </p>
+    </section>
   );
 };
 
